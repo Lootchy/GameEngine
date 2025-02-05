@@ -46,8 +46,8 @@ private:
 	bool active = true;
 	std::vector<std::unique_ptr<Component>> components;
 
-	ComponentArray componentArray;
-	ComponentBitSet componentBitSet;
+	ComponentArray mComponentArray;
+	ComponentBitSet mComponentBitSet;
 
 public:
 
@@ -58,7 +58,7 @@ public:
 	void Destroy() { active = false; }
 
 	template <typename T> bool hasComponent()const {
-		return componentBitSet[getComponentID<T>()];
+		return mComponentBitSet[getComponentTypeID<T>()];
 	}
 
 	template <typename T, typename... TArgs>
@@ -68,8 +68,8 @@ public:
 		std::unique_ptr<Component> uPtr{ c };
 		components.emplace_back(std::move(uPtr));
 
-		componentArray[getComponentTypeID<T>()] = c;
-		componentBitSet[getComponentTypeID<T>()] = true;
+		mComponentArray[getComponentTypeID<T>()] = c;
+		mComponentBitSet[getComponentTypeID<T>()] = true;
 
 		c->Init();
 		return *c;
@@ -77,8 +77,8 @@ public:
 
 	template <typename T> T& getComponent() const 
 	{
-		auto ptr(componentArray[getComponentTypeID<T>()]);
-		return *static_cast<*T>(ptr);
+		auto ptr(mComponentArray[getComponentTypeID<T>()]);
+		return *static_cast<T*>(ptr);
 	}
 };
 
