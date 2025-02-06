@@ -1,6 +1,12 @@
 #include <iostream>
+#include "ECS.h"
+#include "Components.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    Manager manager;
+    Entity& player(manager.addEntity());
+    player.addComponent<TransformComponent>();
+    std::cout << player.getComponent<TransformComponent>().mTransform.position.x << std::endl;
+
 }

@@ -21,8 +21,8 @@ template <typename T> inline ComponentID getComponentTypeID() noexcept
 {
 	static ComponentID typeID = getComponentTypeID();
 	return typeID;
-
 }
+
 
 constexpr std::size_t maxComponents = 32;
 
@@ -64,7 +64,7 @@ public:
 	template <typename T, typename... TArgs>
 	T& addComponent(TArgs&&... mArgs) {
 		T* c(new T(std::forward<TArgs>(mArgs)...));
-		c->entity = this;
+		c->mEntity = this;
 		std::unique_ptr<Component> uPtr{ c };
 		components.emplace_back(std::move(uPtr));
 
@@ -75,11 +75,12 @@ public:
 		return *c;
 	}
 
-	template <typename T> T& getComponent() const 
+	template <typename T> T& getComponent() const
 	{
-		auto ptr(mComponentArray[getComponentTypeID<T>()]);
+		auto ptr = mComponentArray[getComponentTypeID<T>()];
 		return *static_cast<T*>(ptr);
 	}
+
 };
 
 
@@ -97,9 +98,4 @@ public:
 	Entity& addEntity();
 };
 
-
-
-class ECS
-{
-};
 
