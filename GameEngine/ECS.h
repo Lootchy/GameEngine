@@ -82,6 +82,23 @@ public:
 	}
 };
 
+
+class Manager 
+{
+private:
+	std::vector<std::unique_ptr<Entity>> entities;
+
+public:
+	void Update();
+	void Draw();
+	void Refresh();
+
+	bool IsInactive(const std::unique_ptr<Entity>& lEntity);
+	Entity& addEntity();
+};
+
+
+
 class ECS
 {
 };
