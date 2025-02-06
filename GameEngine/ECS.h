@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <bitset>
 #include <array>
+#include "TransformSystem.h"
 
 class Component;
 class Entity;
@@ -88,6 +89,7 @@ class Manager
 {
 private:
 	std::vector<std::unique_ptr<Entity>> entities;
+	TransformSystem transformSystem;
 
 public:
 	void Update();

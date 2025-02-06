@@ -16,6 +16,7 @@ void Entity::Draw()
 
 void Manager::Update()
 {
+	transformSystem.Update(entities);
 	for (auto& e : entities) {
 		e->Update();
 	}

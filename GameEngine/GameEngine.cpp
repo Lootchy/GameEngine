@@ -7,6 +7,8 @@ int main()
     Manager manager;
     Entity& player(manager.addEntity());
     player.addComponent<TransformComponent>();
-    std::cout << player.getComponent<TransformComponent>().mTransform.position.x << std::endl;
+    TransformComponent& transform = player.getComponent<TransformComponent>();
+    std::cout << "Position: " << transform.mTransform.position.x << ", "
+        << transform.mTransform.position.y << std::endl;
 
 }
