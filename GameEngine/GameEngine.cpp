@@ -11,4 +11,5 @@ int main()
     std::cout << "Position: " << transform.mTransform.position.x << ", "
         << transform.mTransform.position.y << std::endl;
 
+    manager.Update();
 }
